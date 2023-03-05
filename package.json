@@ -1,7 +1,7 @@
 {
   "name": "file-header",
   "displayName": "file-header",
-  "description": "add and uodate fileheader",
+  "description": "add and update file-header",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.76.0"
@@ -14,10 +14,58 @@
   "contributes": {
     "commands": [
       {
-        "command": "file-header.helloWorld",
-        "title": "Hello World"
+        "command": "file-header.addFileHeader",
+        "title": "添加文件头"
+      },
+      {
+        "command": "file-header.updateFileHeader",
+        "title": "更新文件头"
       }
-    ]
+    ],
+    "keybindings": [
+      {
+        "command": "file-header.addFileHeader",
+        "key": "ctrl+alt+h",
+        "mac": "cmd+alt+h",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "file-header.updateFileHeader",
+        "key": "ctrl+alt+u",
+        "mac": "cmd+alt+u",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "FileHeader",
+      "properties": {
+        "file-header.author": {
+          "type": "string",
+          "default": "Your Name",
+          "description": "author name"
+        },
+        "file-header.email": {
+          "type": "string",
+          "default": "",
+          "description": "author email"
+        },
+        "file-header.showEmail": {
+          "type": "boolean",
+          "default": true,
+          "description": "show email"
+        },
+        "file-header.copyRight": {
+          "type": "string",
+          "default": "",
+          "description": "copyRight Owner"
+        },
+        "file-header.showCopyRight": {
+          "type": "boolean",
+          "default": true,
+          "description": "show copyRight"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
