@@ -2,6 +2,7 @@
   "name": "file-header",
   "displayName": "file-header",
   "description": "add and update file-header",
+  "publisher": "morningstart",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.76.0"
