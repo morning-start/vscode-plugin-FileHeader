@@ -1,11 +1,20 @@
 # file-header
 
-这个插件提供超级简单的文件头注释功能，支持多种语言。
+![logo](https://github.com/morning-start/vscode-plugin-FileHeader/blob/main/images/logo.png)
+
+这个插件提供超级简单的文件头注释功能，支持多种语言。维护 ing
 
 ## Features
 
+**without json!!!**
+**without json!!!**
+**without json!!!**
+
+---
+
 - 支持添加文件头注释: `ctrl+alt+h`
 - 支持更新文件头注释: `ctrl+alt+u`
+- 需要其他功能的话，可以提 issue
 
 ### 支持语言
 
@@ -23,7 +32,7 @@
 
 ## Extension Settings
 
-![setting](images/2023-03-05-18-32-36.png)
+![setting](https://github.com/morning-start/vscode-plugin-FileHeader/blob/main/images/2023-03-05-18-32-36.png)
 
 ## Release Notes
 
