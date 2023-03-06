@@ -32,7 +32,7 @@
 
 ## Extension Settings
 
-![setting](https://github.com/morning-start/vscode-plugin-FileHeader/blob/main/images/2023-03-05-18-32-36.png)
+![setting](https://github.com/morning-start/vscode-plugin-FileHeader/blob/main/images/setting.png)
 
 ## Release Notes
 
