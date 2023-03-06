@@ -1,6 +1,6 @@
 # file-header
 
-![logo](https://github.com/morning-start/vscode-plugin-FileHeader/blob/main/images/logo.png)
+![logo](images/logo.png)
 
 这个插件提供超级简单的文件头注释功能，支持多种语言。维护 ing
 
@@ -32,7 +32,7 @@
 
 ## Extension Settings
 
-![setting](https://github.com/morning-start/vscode-plugin-FileHeader/blob/main/images/setting.png)
+![setting](images/setting.png)
 
 ## Release Notes
 

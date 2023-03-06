@@ -1,12 +1,19 @@
 {
-  "name": "file-header",
-  "displayName": "file-header",
-  "description": "add and update file-header",
+  "name": "file-header-morningstart",
+  "displayName": "FileHeader",
+  "description": "add and update file-header, setting without json",
   "publisher": "morningstart",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.76.0"
   },
+  "keywords": [
+    "vscode",
+    "file-header",
+    "header"
+  ],
+  "repository": "https://github.com/morning-start/vscode-plugin-FileHeader",
+  "icon": "images/logo.png",
   "categories": [
     "Other"
   ],
