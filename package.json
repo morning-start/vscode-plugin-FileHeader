@@ -52,16 +52,6 @@
           "default": "Your Name",
           "description": "author name"
         },
-        "file-header.email": {
-          "type": "string",
-          "default": "",
-          "description": "author email"
-        },
-        "file-header.showEmail": {
-          "type": "boolean",
-          "default": true,
-          "description": "show email"
-        },
         "file-header.copyRight": {
           "type": "string",
           "default": "",

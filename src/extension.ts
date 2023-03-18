@@ -15,7 +15,6 @@ export function activate(context: vscode.ExtensionContext) {
   const getConfig = (symbol: string) => {
     let header = vscode.workspace.getConfiguration("file-header");
     let author = `${symbol}@Author: ${header.get("author")}\n`;
-    let email = `${symbol}@Email: ${header.get("email")}\n`;
     let date = `${symbol}@Date: ${new Date().toLocaleString()}\n`;
     let lastEditors = `${symbol}@LastEditors: ${header.get("author")}\n`;
     let lastEditTime = `${symbol}@LastEditTime: ${new Date().toLocaleString()}\n`;
@@ -25,7 +24,6 @@ export function activate(context: vscode.ExtensionContext) {
     }. All rights reserved.\n`;
     return {
       author,
-      email,
       date,
       lastEditors,
       lastEditTime,
@@ -67,15 +65,8 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showErrorMessage("FileHeader: 暂不支持该语言");
         return;
       }
-      let {
-        author,
-        email,
-        date,
-        lastEditors,
-        lastEditTime,
-        description,
-        copyright,
-      } = getConfig(symbol[1]);
+      let { author, date, lastEditors, lastEditTime, description, copyright } =
+        getConfig(symbol[1]);
 
       let showCopyRight = vscode.workspace
         .getConfiguration("file-header")
@@ -84,9 +75,9 @@ export function activate(context: vscode.ExtensionContext) {
         .getConfiguration("file-header")
         .get("showEmail") as boolean;
 
-      let template = `${symbol[0]}\n${author}${
-        showEmail ? email : ""
-      }${date}${lastEditors}${lastEditTime}${description}${
+      let template = `${
+        symbol[0]
+      }\n${author}${date}${lastEditors}${lastEditTime}${description}${
         showCopyRight ? copyright : ""
       }${symbol[2]}\n`;
       editor?.edit((editBuilder) => {
@@ -125,8 +116,8 @@ export function activate(context: vscode.ExtensionContext) {
         }
         editBuilder.replace(
           new vscode.Range(
-            new vscode.Position(4, 0),
-            new vscode.Position(6, 0)
+            new vscode.Position(3, 0),
+            new vscode.Position(5, 0)
           ),
           `${lastEditors}${lastEditTime}`
         );
