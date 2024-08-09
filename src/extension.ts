@@ -19,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
     let lastEditors = `${symbol}@LastEditors: ${header.get("author")}\n`;
     let lastEditTime = `${symbol}@LastEditTime: ${new Date().toLocaleString()}\n`;
     let description = `${symbol}Description: \n`;
-    let copyright = `${symbol}Copyright: Copyright (©)}) ${new Date().getFullYear()} ${
+    let copyright = `${symbol}Copyright: Copyright (©) ${new Date().getFullYear()} ${
       header.get("copyRight") || header.get("author")
     }. All rights reserved.\n`;
     return {
@@ -48,6 +48,8 @@ export function activate(context: vscode.ExtensionContext) {
       case "rust":
       case "swift":
         return ["/**", " * ", " */"];
+      case "powershell":
+        return ["#", "# ", "#"];
       default:
         return [];
     }
