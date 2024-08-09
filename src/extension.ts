@@ -48,6 +48,8 @@ export function activate(context: vscode.ExtensionContext) {
       case "rust":
       case "swift":
         return ["/**", " * ", " */"];
+      case "powershell":
+          return ["#", "# ", "#"];
       default:
         return [];
     }
