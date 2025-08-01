@@ -29,7 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       editor?.edit((editBuilder) => {
         editBuilder.insert(new vscode.Position(0, 0), template);
-        vscode.window.showInformationMessage("FileHeader: 添加头部信息成功");
+        vscode.window.showInformationMessage("FileHeader: 添加信息成功");
       });
     }
   );
@@ -66,6 +66,7 @@ export function activate(context: vscode.ExtensionContext) {
             editBuilder.replace(range, `@${item.newValue}`);
           }
         });
+        vscode.window.showInformationMessage("FileHeader: 添加信息成功");
       });
     }
   );
