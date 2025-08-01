@@ -12,9 +12,16 @@ export type UpdateData = {
  * @param symbol - 包含三个符号的数组，用于标记模板的开始、中间和结束部分
  * @returns 格式化后的模板字符串
  */
-export function formatConfig(cfg: string[], symbol: string[]) {
+export function formatConfig(cfg: object, symbol: string[]) {
   // 将配置项数组映射为带符号标记的格式
-  let content = cfg.map((item) => {
+  // cfg -> key: value 的数组
+  let info = Object.entries(cfg).map(([key, value]) => {
+    // key 首字母大写
+    let title = key.charAt(0).toUpperCase() + key.slice(1);
+    return `${title}: ${value}`;
+  });
+
+  let content = info.map((item) => {
     return `${symbol[1]}@${item}`;
   });
   // 构造最终的模板字符串
@@ -31,15 +38,20 @@ export function formatConfig(cfg: string[], symbol: string[]) {
  */
 export function generateBaseConfig(editor: vscode.TextEditor) {
   const cfg = vscode.workspace.getConfiguration("file-header");
-  let author = `Author: ${cfg.get("author")}`;
-  let date = `CreateDate: ${getFileCreateDate(editor?.document.uri)}`;
-  let lastEditors = `LastEditors: ${cfg.get("author")}`;
-  let lastEditTime = `LastEditTime: ${new Date().toLocaleString()}`;
-  let description = `Description: `;
-  let copyright = `Copyright: Copyright (©)}) ${new Date().getFullYear()} ${
-    cfg.get("copyRight") || cfg.get("author")
-  }. All rights reserved.`;
-  return { author, date, lastEditors, lastEditTime, description, copyright };
+  const author = cfg.get("author") as string;
+  const description = cfg.get("description") as string;
+  const copyRight = cfg.get("copyRight") as string;
+  let data = {
+    author,
+    date: getFileCreateDate(editor.document.uri).toString(),
+    lastEditors: author,
+    lastEditTime: new Date().toLocaleString(),
+    description,
+    copyright: `Copyright (©)}) ${new Date().getFullYear()} ${
+      copyRight || author
+    }. All rights reserved.`,
+  };
+  return data;
 }
 
 /**
@@ -74,25 +86,13 @@ export function getCommentSymbols(
 /**
  * 获取文件的创建日期
  * @param uri - 文件的Uri对象，用于定位文件路径
- * @returns 返回文件创建日期的字符串格式(YYYY-MM-DD)，如果获取失败则返回undefined
+ * @returns 返回文件创建日期的字符串格式(YYYY-MM-DD)
  */
-export function getFileCreateDate(uri: vscode.Uri): string | undefined {
-  try {
-    // 验证输入参数
-    if (!uri || !uri.fsPath) {
-      return undefined;
-    }
-
-    // 获取文件状态信息
-    const stat = fs.statSync(uri.fsPath);
-    const createDate = stat.birthtime;
-    // 格式化为 YYYY-MM-DD HH:mm:ss
-    return createDate.toLocaleString();
-  } catch (err) {
-    // 记录错误信息便于调试
-    console.warn(`Failed to get file create date for ${uri?.fsPath}:`, err);
-    return undefined;
-  }
+export function getFileCreateDate(uri: vscode.Uri) {
+  const stat = fs.statSync(uri.fsPath);
+  const createDate = stat.birthtime;
+  // 格式化为 YYYY-MM-DD HH:mm:ss
+  return createDate.toLocaleString();
 }
 
 /**

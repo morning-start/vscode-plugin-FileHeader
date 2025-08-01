@@ -57,10 +57,15 @@
           "default": "",
           "description": "copyRight Owner"
         },
-        "file-header.showCopyRight": {
-          "type": "boolean",
-          "default": true,
-          "description": "show copyRight"
+        "file-header.moreInfo": {
+          "type": "object",
+          "markdownDescription": "自定义header信息",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "default": {
+            "email": "xxx@xxx.com"
+          }
         }
       }
     }

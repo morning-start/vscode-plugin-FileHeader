@@ -25,7 +25,9 @@ export function activate(context: vscode.ExtensionContext) {
       }
 
       let baseConfig = generateBaseConfig(editor);
-      let template = formatConfig(Object.values(baseConfig), symbol);
+      const cfg = vscode.workspace.getConfiguration("file-header");
+      const info = cfg.get("moreInfo") as object;
+      let template = formatConfig({ ...baseConfig, ...info }, symbol);
 
       editor?.edit((editBuilder) => {
         editBuilder.insert(new vscode.Position(0, 0), template);
