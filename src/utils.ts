@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
-import { getCommentSymbols } from "./core";
+import { getCommentSymbols, matchUpdateRage, UpdateData } from "./core";
+import exp = require("constants");
 
 /**
  * 初始化上下文环境
@@ -19,7 +20,6 @@ export function initContext():
   const symbol = getCommentSymbols(editor);
   if (symbol.length === 0) {
     // 如果不支持当前语言，显示错误消息
-    vscode.window.showErrorMessage("FileHeader: 暂不支持该语言");
     return false;
   }
 
@@ -37,4 +37,26 @@ export function hasHeader(editor: vscode.TextEditor, symbol: string) {
   const firstLine = editor.document.lineAt(0);
   // 检查第一行文本是否以指定符号加"FileHeader"开头
   return firstLine.text.startsWith(`${symbol}FileHeader`);
+}
+
+export function insertEditor(editor: vscode.TextEditor, template:string) {
+  editor?.edit((editBuilder) => {
+    editBuilder.insert(new vscode.Position(0, 0), template);
+  });
+}
+
+export function updateEditor(
+  editor: vscode.TextEditor,
+  symbol: string[],
+  updateData: UpdateData[]
+) {
+  editor?.edit((editBuilder) => {
+    updateData.forEach((item) => {
+      // 正则的方式更新时间
+      let range = matchUpdateRage(editor.document, symbol, item.reg);
+      if (range) {
+        editBuilder.replace(range, `${item.reg}: ${item.newValue}`);
+      }
+    });
+  });
 }
