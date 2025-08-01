@@ -55,6 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       let updateData: UpdateData[] = [
         { reg: "@LastEditTime", newValue: lastEditTime },
+        { reg: "@LastEditors", newValue: lastEditors },
       ];
 
       editor?.edit((editBuilder) => {
