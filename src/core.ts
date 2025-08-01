@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
+
 export type UpdateData = {
   reg: RegExp | string;
   newValue: string;
@@ -94,24 +95,41 @@ export function getFileCreateDate(uri: vscode.Uri): string | undefined {
   }
 }
 
+/**
+ * 从文档中提取头部上下文内容
+ * @param document - 要处理的完整文档字符串
+ * @param symbol - 包含三个符号的数组，用于定位提取范围
+ * @returns 返回从第一个符号位置开始到第三个符号结束位置的子字符串
+ */
 function getHeaderContext(document: string, symbol: string[]) {
+  // 根据符号数组中的起始和结束符号位置提取文档片段
   return document.substring(
     document.indexOf(symbol[0]),
     document.indexOf(symbol[2]) + symbol[2].length + 1
   );
 }
 
+/**
+ * 匹配文档头部内容中的特定模式并返回对应的范围
+ * @param document - VSCode文本文档对象
+ * @param symbol - 用于标识头部内容的符号数组
+ * @param reg - 用于匹配的正则表达式或字符串模式
+ * @returns 匹配内容对应的VSCode范围对象，如果未找到匹配则返回undefined
+ */
 export function matchUpdateRage(
   document: vscode.TextDocument,
   symbol: string[],
   reg: string | RegExp
 ) {
+  // 获取文档头部内容并匹配指定模式
   let headerContent = getHeaderContext(document.getText(), symbol);
   let line = headerContent.match(reg);
 
+  // 如果未找到匹配内容则直接返回
   if (!line || line.index === undefined) {
     return;
   }
+  // 根据匹配位置计算范围的起始和结束位置
   const start = document.positionAt(line.index);
   const row = document.lineAt(start.line);
   const end = row.range.end;
