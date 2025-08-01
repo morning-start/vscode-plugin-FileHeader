@@ -3,7 +3,7 @@
   "displayName": "FileHeader",
   "description": "add and update file-header, setting without json",
   "publisher": "morningstart",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.76.0"
   },
