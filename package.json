@@ -3,7 +3,7 @@
   "displayName": "FileHeader",
   "description": "add and update file-header, setting without json",
   "publisher": "morningstart",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.76.0"
   },
@@ -17,7 +17,9 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
@@ -47,6 +49,11 @@
     "configuration": {
       "title": "FileHeader",
       "properties": {
+        "file-header.autoUpdate": {
+          "type": "boolean",
+          "default": false,
+          "description": "是否在保存时自动更新文件头"
+        },
         "file-header.author": {
           "type": "string",
           "default": "Your Name",

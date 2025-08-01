@@ -18,6 +18,7 @@ export function formatConfig(cfg: object, symbol: string[]) {
   let info = Object.entries(cfg).map(([key, value]) => {
     // key 首字母大写
     let title = key.charAt(0).toUpperCase() + key.slice(1);
+    value = value || "";
     return `${title}: ${value}`;
   });
 

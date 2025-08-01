@@ -12,17 +12,17 @@ export function activate(context: vscode.ExtensionContext) {
     updateFileHeader
   );
 
-  // const cfg = vscode.workspace.getConfiguration("file-header");
-  // const isAutoUpdate = cfg.get("autoUpdate") as boolean;
-  // let autoUpdate = vscode.workspace.onWillSaveTextDocument((e) => {
-  //   //  如果配置项为true，则自动更新文件头
-  //   if (isAutoUpdate) {
-  //     autoUpdateFileHeader();
-  //   }
-  //   e.document.save();
-  // });
+  let autoUpdate = vscode.workspace.onWillSaveTextDocument((e) => {
+    const cfg = vscode.workspace.getConfiguration("file-header");
+    const isAutoUpdate = cfg.get("autoUpdate") as boolean;
+    //  如果配置项为true，则自动更新文件头
+    if (isAutoUpdate) {
+      autoUpdateFileHeader();
+    }
+    e.document.save();
+  });
 
-  // context.subscriptions.push(autoUpdate);
+  context.subscriptions.push(autoUpdate);
   context.subscriptions.push(addHeader);
   context.subscriptions.push(updateHeader);
 }
