@@ -34,10 +34,3 @@
 
 ![setting](images/setting.png)
 
-## Release Notes
-
-### 0.0.1
-
-- 支持添加文件头注释: `ctrl+alt+h`
-- 支持更新文件头注释: `ctrl+alt+u`
-- 支持多语言
